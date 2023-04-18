@@ -1,6 +1,7 @@
 import React, { ChangeEvent, ReactEventHandler, SyntheticEvent } from 'react'
 import { Post } from '../../App'
 import { PostsListArgs } from '../../App'
+import garbageIcon from '../../assets/i.webp'
 
 const PostsList = (args:PostsListArgs) => {
   function emojiOnClick(currentPostId:number,emoji:string){
@@ -22,16 +23,30 @@ const PostsList = (args:PostsListArgs) => {
     const onAuthorClick = ()=>{
       location.href = `http://127.0.0.1:5173/author/${post.author}`
     }
+    const onDeleteClick = ()=>{
+      const newPosts = args.posts.filter(fpost=>fpost.id!==post.id)
+      args.setPosts(newPosts)
+      window.location.reload();
+    }
     console.log(post)
     const emojis = Object.entries(post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
     return (
       <article className='post' key={post.id}>
           <h3 className='link' onClick={onTitleClick}>{post.title}</h3>
-          <img src={post.image} alt="" />
-          <p className='content'>{post.content}</p>
-          {emojis}
-          <p>posted at {new Date(post.timestamp).getHours()}:{new Date(post.timestamp).getMinutes()}</p>
-          <p className='link' onClick={onAuthorClick}>by {post.author}</p>
+          {/* <img src={post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> */}
+          {
+            post.image !== '' ? 
+            <img src={post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> : <br/> 
+          }
+          {
+            post.content !== '' ? 
+            <p className='content'>{post.content}</p> : <br/> 
+          }
+          
+          {emojis} 
+            <p>posted at {new Date(post.timestamp).getHours()}:{new Date(post.timestamp).getMinutes()}</p>
+            <p>by <span className='link' onClick={onAuthorClick}>{post.author}</span></p>
+            <button className='garbaj' onClick={onDeleteClick}><img src={garbageIcon}/></button>
       </article>
   )})
   renderedPosts.reverse()
@@ -39,6 +54,7 @@ const PostsList = (args:PostsListArgs) => {
     <section>
         <h2>Posts</h2>
         <div className='posts'>
+          {renderedPosts.length === 0 ? <p>It's so empty here...</p> : <></>}
           {renderedPosts}
         </div>
     </section>
