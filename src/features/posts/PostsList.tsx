@@ -20,16 +20,13 @@ const PostsList = (args:PostsListArgs) => {
       localStorage.setItem('post',JSON.stringify(post))
       location.href = `http://127.0.0.1:5173/post/${post.id}`
     }
-    // const onTagClick = ()=>{
-    //   location.href = `http://127.0.0.1:5173/author/${post.author}`
-    // }
     const onDeleteClick = ()=>{
       const newPosts = args.posts.filter(fpost=>fpost.id!==post.id)
       args.setPosts(newPosts)
     }
     console.log(post)
     const emojis = Object.entries(post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
-    const tags = post.tags.map(tag=><div className='tag' key={tag}>{tag}#</div>)
+    const tags = post.tags.map(tag=><div onClick={()=>{location.href = `http://127.0.0.1:5173/tag/${tag}`}} className='tag' key={tag}>{tag}#</div>)
     return (
       <article className='post' key={post.id}>
           <h3 className='link' onClick={onTitleClick}>{post.title}</h3>
@@ -50,7 +47,6 @@ const PostsList = (args:PostsListArgs) => {
   renderedPosts.reverse()
   return (
     <section>
-        <h2>Posts</h2>
         <div className='posts'>
           {renderedPosts.length === 0 ? <p>It's so empty here...</p> : <></>}
           {renderedPosts}

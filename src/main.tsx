@@ -23,10 +23,6 @@ const router = createBrowserRouter([
     path: "/tag/:tag",
     element: <TagPostsList/>,
   },
-  // {
-  //   path: "/author/:author",
-  //   element: <AuthorPostsList/>,
-  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

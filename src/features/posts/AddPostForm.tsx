@@ -9,7 +9,6 @@ import { useLocalStorage } from '../../hooks/UseLocalStorage'
 const AddPostForm = (args:AddPostFormArgs) => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    // const [author, setAuthor] = useState('')
     const [image, setImage] = useState('')
     const [tags, setTags] = useState<string[]>([])
     const [tag, setTag] = useState<string>('')
@@ -24,14 +23,10 @@ const AddPostForm = (args:AddPostFormArgs) => {
                 setImage(result);
             })
         }}
-    // const onAuthorChanged = (e:ChangeEvent<HTMLInputElement>) => setAuthor(e.target.value);
     const tagAdd = (newTag:string) => {
         if (!tags.includes(newTag)){
             const newTags = [...tags, newTag]
             setTags(newTags)
-            // console.log(newTag)
-            // console.log(tags)
-            // console.log(newTags)
             setTag('')
         } else {
             setTag('')
@@ -54,7 +49,6 @@ const AddPostForm = (args:AddPostFormArgs) => {
                 id: id,
                 title: title,
                 content: content,
-                // author: author,
                 emojis: Object.assign({}, initialEmojis),
                 timestamp: new Date().toUTCString(),
                 image: image,
@@ -67,11 +61,8 @@ const AddPostForm = (args:AddPostFormArgs) => {
             setId(newId)
             setTitle('')
             setContent('')
-            // setAuthor('')
             setTags([])
             setImage('')
-            // console.log(newPosts)
-            // console.log(args)
         }
     }
     const ClearPosts = ()=>{
@@ -85,9 +76,9 @@ const AddPostForm = (args:AddPostFormArgs) => {
                 tagRemove(postTag)
             }
             return (
-            <div className='tag' key={postTag}>
+            <div key={postTag}>
                 <span>#{postTag}</span>
-                <button 
+                <button className='Xbutton'
                     onClick={onTagXClick}
                 >x</button>
             </div>
@@ -106,13 +97,6 @@ const AddPostForm = (args:AddPostFormArgs) => {
                 name='postTitle'
                 value={title}
                 onChange={onTitleChanged} />
-            {/* <label htmlFor='postAuthor'>Post author:</label>
-            <input 
-                type='text'
-                id='postAuthor'
-                name='postAuthor'
-                value={author}
-                onChange={onAuthorChanged} /> */}
             <label htmlFor='postContent'>Content:</label>
             <textarea
                     id="postContent"
@@ -121,11 +105,11 @@ const AddPostForm = (args:AddPostFormArgs) => {
                     onChange={onContentChanged} />
             <label htmlFor='file'>Image:</label>
             <input accept='.jpg' onChange={onImageChanged} type='file' name='file' id='file'/><br />
-            <label htmlFor='postAuthor'>Add tag:</label>
+            <label htmlFor='postTag'>Add tag:</label>
             <input 
                 type='text'
-                id='postAuthor'
-                name='postAuthor'
+                id='postTag'
+                name='postTag'
                 value={tag}
                 onChange={onTagChanged}
                 onKeyDown={(e)=>{
@@ -139,7 +123,6 @@ const AddPostForm = (args:AddPostFormArgs) => {
                     tagAdd(tag)
                 }}>add tag</button>
             {tagComponent}
-            {/* <img src={image} /> */}
             <button type='button' onClick={onSavePostClicked} >Save post</button>
         </form>
     </section>

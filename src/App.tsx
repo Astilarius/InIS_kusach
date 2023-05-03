@@ -60,6 +60,7 @@ function App() {
   return (
     <div className="App">
       <AddPostForm {...addPostFormArgs}/>
+      <h2>Posts</h2>
       <PostsList {...postsListArgs}/>
     </div>
   )
