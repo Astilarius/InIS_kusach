@@ -26,14 +26,12 @@ const PostsList = (args:PostsListArgs) => {
     const onDeleteClick = ()=>{
       const newPosts = args.posts.filter(fpost=>fpost.id!==post.id)
       args.setPosts(newPosts)
-      window.location.reload();
     }
     console.log(post)
     const emojis = Object.entries(post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
     return (
       <article className='post' key={post.id}>
           <h3 className='link' onClick={onTitleClick}>{post.title}</h3>
-          {/* <img src={post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> */}
           {
             post.image !== '' ? 
             <img src={post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> : <br/> 

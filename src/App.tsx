@@ -1,7 +1,15 @@
+// make this its own app, for people to make reminders for themselves. features:
+// point lists
+// tables
+// also comments, but for yourself
+// tags instead authors
+// edit button
+
 import { useEffect, useState } from 'react'
 import AddPostForm from './features/posts/AddPostForm'
 import PostsList from './features/posts/PostsList'
 import { useLocalStorage } from './hooks/UseLocalStorage'
+import LoginForm from './features/login/LoginComponent'
 import './App.css'
 
 interface Emojis{
@@ -13,6 +21,16 @@ interface Emojis{
 export interface Post{
   id:number,
   title:string,
+  content:string,
+  emojis:Emojis,
+  timestamp:string,
+  image:string,
+  author:string,
+  comments: string[],
+  tags: string[],
+}
+export interface Comment{
+  id:number,
   content:string,
   emojis:Emojis,
   timestamp:string,
@@ -43,6 +61,7 @@ function App() {
 
   return (
     <div className="App">
+      <LoginForm />
       <AddPostForm {...addPostFormArgs}/>
       <PostsList {...postsListArgs}/>
     </div>

@@ -35,7 +35,9 @@ const AddPostForm = (args:AddPostFormArgs) => {
                 author: author,
                 emojis: Object.assign({}, initialEmojis),
                 timestamp: new Date().toUTCString(),
-                image: image
+                image: image,
+                comments: [],
+                tags: [],
             }
             const newPosts = [...args.posts, newPost]
             args.setPosts(newPosts)
@@ -44,6 +46,7 @@ const AddPostForm = (args:AddPostFormArgs) => {
             setTitle('')
             setContent('')
             setAuthor('')
+            setImage('')
             // console.log(newPosts)
             // console.log(args)
         }
@@ -80,7 +83,7 @@ const AddPostForm = (args:AddPostFormArgs) => {
                     onChange={onContentChanged} />
             <label htmlFor='file'>Image:</label>
             <input accept='.jpg' onChange={onImageChanged} type='file' name='file' id='file'/><br />
-            <img src={image} />
+            {/* <img src={image} /> */}
             <button type='button' onClick={onSavePostClicked} >Save post</button>
         </form>
     </section>

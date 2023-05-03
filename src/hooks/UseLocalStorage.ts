@@ -1,16 +1,6 @@
 import { useState } from "react";
 
 export const useLocalStorage = (key:string, defaultValue:any=null) => {
-    // if(setting === true){
-    //     window.localStorage.setItem(key, JSON.stringify(defaultValue));
-    // } else {
-    //   const defaultValueCopy = Object.assign(defaultValue)
-    //   try{
-    //     defaultValue = JSON.parse(localStorage.getItem(key)!)
-    //   } catch {
-    //     defaultValue = defaultValueCopy
-    //   }
-    // }
 
     const storedItem = localStorage.getItem(key)
     if (storedItem !== null){
