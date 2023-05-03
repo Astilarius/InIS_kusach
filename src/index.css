@@ -125,3 +125,11 @@ form img{
 .garbaj img{
   height: 20px;
 }
+
+/* .tag{
+  text-decoration-line: underline;
+} */
+
+.tag:hover{
+  text-decoration-line: underline;
+}

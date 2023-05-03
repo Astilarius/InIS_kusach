@@ -20,15 +20,16 @@ const PostsList = (args:PostsListArgs) => {
       localStorage.setItem('post',JSON.stringify(post))
       location.href = `http://127.0.0.1:5173/post/${post.id}`
     }
-    const onAuthorClick = ()=>{
-      location.href = `http://127.0.0.1:5173/author/${post.author}`
-    }
+    // const onTagClick = ()=>{
+    //   location.href = `http://127.0.0.1:5173/author/${post.author}`
+    // }
     const onDeleteClick = ()=>{
       const newPosts = args.posts.filter(fpost=>fpost.id!==post.id)
       args.setPosts(newPosts)
     }
     console.log(post)
     const emojis = Object.entries(post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
+    const tags = post.tags.map(tag=><div className='tag' key={tag}>{tag}#</div>)
     return (
       <article className='post' key={post.id}>
           <h3 className='link' onClick={onTitleClick}>{post.title}</h3>
@@ -40,10 +41,9 @@ const PostsList = (args:PostsListArgs) => {
             post.content !== '' ? 
             <p className='content'>{post.content}</p> : <br/> 
           }
-          
           {emojis} 
+          {tags}
             <p>posted at {new Date(post.timestamp).getHours()}:{new Date(post.timestamp).getMinutes()}</p>
-            <p>by <span className='link' onClick={onAuthorClick}>{post.author}</span></p>
             <button className='garbaj' onClick={onDeleteClick}><img src={garbageIcon}/></button>
       </article>
   )})

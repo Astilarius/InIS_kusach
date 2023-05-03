@@ -111,9 +111,9 @@ function PostPage() {
       setPosts(newPosts)
       window.location.reload();
     }
-    const onAuthorClick = ()=>{
-      location.href = `http://127.0.0.1:5173/author/${post.author}`
-    }
+    // const onAuthorClick = ()=>{
+    //   location.href = `http://127.0.0.1:5173/author/${post.author}`
+    // }
     return (
         <div className='post'>
             <button onClick={onBackClick}>back</button>
@@ -123,7 +123,9 @@ function PostPage() {
               <img src={post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> : <br/> 
             }
             {
-              post.content !== '' ? <p className='content'>{post.content}</p> : <br/>  }{emojis}<p>by <span className='link' onClick={onAuthorClick}>{post.author}</span></p>
+              post.content !== '' ? <p className='content'>{post.content}</p> : <br/>  
+            }{emojis}
+            {/* <p>by <span className='link' onClick={onAuthorClick}>{post.author}</span></p> */}
             <button className='garbaj' onClick={onDeleteClick}><img src={garbageIcon}/></button>
             <form onSubmit={handleCommentSubmit}>
                 <input type="text" value={comment} onChange={handleCommentChange} placeholder="Add a comment" />

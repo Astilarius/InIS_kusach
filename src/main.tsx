@@ -8,6 +8,7 @@ import {
 import './index.css'
 import PostPage from './features/posts/PostPage';
 import AuthorPostsList from './features/posts/AuthorPostsList';
+import TagPostsList from './features/posts/TagPostsList';
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,13 @@ const router = createBrowserRouter([
     element: <PostPage/>,
   },
   {
-    path: "/author/:author",
-    element: <AuthorPostsList/>,
+    path: "/tag/:tag",
+    element: <TagPostsList/>,
   },
+  // {
+  //   path: "/author/:author",
+  //   element: <AuthorPostsList/>,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
