@@ -24,7 +24,14 @@ const PostsList = (args:PostsListArgs) => {
       const newPosts = args.posts.filter(fpost=>fpost.id!==post.id)
       args.setPosts(newPosts)
     }
-    console.log(post)
+    const postContent = post.content.split('\n').map(substr=>{
+      if(substr[0]==='*'){
+        substr = substr.substring(1)
+        return <p><input type='checkbox'></input> {substr}</p>
+      } else {
+        return <p>{substr}</p>
+      }
+    })
     const emojis = Object.entries(post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
     const tags = post.tags.map(tag=><div onClick={()=>{location.href = `http://127.0.0.1:5173/tag/${tag}`}} className='tag' key={tag}>{tag}#</div>)
     return (
@@ -36,7 +43,8 @@ const PostsList = (args:PostsListArgs) => {
           }
           {
             post.content !== '' ? 
-            <p className='content'>{post.content}</p> : <br/> 
+            <div>{postContent}</div> : <br/>
+            // <p className='content'>{post.content}</p> : <br/> 
           }
           {emojis} 
           {tags}

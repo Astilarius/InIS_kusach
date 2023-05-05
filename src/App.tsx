@@ -33,7 +33,6 @@ export interface Comment{
   emojis:Emojis,
   timestamp:string,
   image:string,
-  author:string,
 }
 export interface AddPostFormArgs{
   posts: Post[],
