@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import './index.css'
 import PostPage from './features/posts/PostPage';
-import AuthorPostsList from './features/posts/AuthorPostsList';
 import TagPostsList from './features/posts/TagPostsList';
 
 const router = createBrowserRouter([

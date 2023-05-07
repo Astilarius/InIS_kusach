@@ -1,7 +1,8 @@
-import React, { ChangeEvent, ReactEventHandler, SyntheticEvent } from 'react'
-import { Post } from '../../App'
+import React, { ChangeEvent, ReactEventHandler, SyntheticEvent, useState } from 'react'
+import { Post, PostArgs } from '../../App'
 import { PostsListArgs } from '../../App'
 import garbageIcon from '../../assets/i.webp'
+import PostComponent from './Post'
 
 const PostsList = (args:PostsListArgs) => {
   function emojiOnClick(currentPostId:number,emoji:string){
@@ -24,33 +25,14 @@ const PostsList = (args:PostsListArgs) => {
       const newPosts = args.posts.filter(fpost=>fpost.id!==post.id)
       args.setPosts(newPosts)
     }
-    const postContent = post.content.split('\n').map(substr=>{
-      if(substr[0]==='*'){
-        substr = substr.substring(1)
-        return <p><input type='checkbox'></input> {substr}</p>
-      } else {
-        return <p>{substr}</p>
-      }
-    })
+    const onEditClick = () => {
+
+    }
     const emojis = Object.entries(post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
     const tags = post.tags.map(tag=><div onClick={()=>{location.href = `http://127.0.0.1:5173/tag/${tag}`}} className='tag' key={tag}>{tag}#</div>)
+    const postArgs:PostArgs = {post:post, setPosts:args.setPosts};
     return (
-      <article className='post' key={post.id}>
-          <h3 className='link' onClick={onTitleClick}>{post.title}</h3>
-          {
-            post.image !== '' ? 
-            <img src={post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> : <br/> 
-          }
-          {
-            post.content !== '' ? 
-            <div>{postContent}</div> : <br/>
-            // <p className='content'>{post.content}</p> : <br/> 
-          }
-          {emojis} 
-          {tags}
-            <p>posted at {new Date(post.timestamp).getHours()}:{new Date(post.timestamp).getMinutes()}</p>
-            <button className='garbaj' onClick={onDeleteClick}><img src={garbageIcon}/></button>
-      </article>
+      <PostComponent key={post.id} {...postArgs}/>
   )})
   renderedPosts.reverse()
   return (
