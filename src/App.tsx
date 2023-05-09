@@ -5,7 +5,7 @@
 // tags instead authors
 // edit button
 
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import AddPostForm from './features/posts/AddPostForm'
 import PostsList from './features/posts/PostsList'
 import { useLocalStorage } from './hooks/UseLocalStorage'
@@ -57,8 +57,9 @@ function App() {
   const currentDate = new Date()
   currentDate.setMinutes(currentDate.getMinutes()-5)
   const [posts, setPosts] = useLocalStorage('posts', [])
-  // const [posts, setPosts] = useState(post)
-  // const addPostFormArgs:AddPostFormArgs = {posts:posts,setPosts:setPosts}
+  const [searchQuery, setSearchQuery] = useState('')
+  
+  const onSearchQueryChanged = (e:ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
   const addPostFormArgs:AddPostFormArgs = {setPosts:setPosts}
   const postsListArgs:PostsListArgs = {posts:posts,setPosts:setPosts}
   useEffect(()=>{
@@ -74,6 +75,14 @@ function App() {
       <button onClick={ClearPosts}>Clear all posts</button>
       <AddPostForm {...addPostFormArgs}/>
       <h2>Posts</h2>
+      <label htmlFor='postTitle'>Search for a post:</label>
+      <input
+          type='text'
+          id='postTitle'
+          name='postTitle'
+          value={searchQuery}
+          onChange={onSearchQueryChanged} />
+      <button onClick={(e)=>{location.href = `http://127.0.0.1:5173/search/${searchQuery}`}}>search</button>
       <PostsList {...postsListArgs}/>
     </div>
   )

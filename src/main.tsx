@@ -8,6 +8,7 @@ import {
 import './index.css'
 import PostPage from './features/posts/PostPage';
 import TagPostsList from './features/posts/TagPostsList';
+import SearchPosts from './features/posts/SearchPosts';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/tag/:tag",
     element: <TagPostsList/>,
+  },
+  {
+    path: "/search/:title",
+    element: <SearchPosts/>,
   },
 ]);
 
