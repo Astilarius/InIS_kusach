@@ -5,6 +5,7 @@ import garbageIcon from '../../assets/i.webp'
 import PostComponent from './Post'
 
 const PostsList = (args:PostsListArgs) => {
+  const [postsClassName, setPostsClassName] = useState('column')
   function emojiOnClick(currentPostId:number,emoji:string){
     console.log(currentPostId)
     const newPosts = args.posts.map(post=>{
@@ -35,12 +36,24 @@ const PostsList = (args:PostsListArgs) => {
       <PostComponent key={post.id} {...postArgs}/>
   )})
   renderedPosts.reverse()
+  const onGridClick = ()=>{
+    setPostsClassName('grid')
+  }
+  const onColumnClick = ()=>{
+    setPostsClassName('column')
+  }
+
+  
+  
   return (
     <section>
-        <div className='posts'>
-          {renderedPosts.length === 0 ? <p>It's so empty here...</p> : <></>}
+      <button type='button' onClick={onGridClick}>grid</button>
+      <button type='button' onClick={onColumnClick}>column</button>
+      <div className={`posts ${postsClassName}`}>
+        {renderedPosts.length === 0 ? <p>It's so empty here...</p> : <>
           {renderedPosts}
-        </div>
+        </>}
+      </div>
     </section>
   )
 }

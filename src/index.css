@@ -23,10 +23,7 @@ a:hover {
 }
 body {
   margin: 0;
-  /* display: flex; */
   place-items: center;
-  /* min-width: 320px;
-  min-height: 100vh; */
 }
 h1 {
   font-size: 3.2em;
@@ -51,27 +48,11 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
 form button{
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* article h3:hover{
-  text-decoration: underline;
-} */
-
 .link:hover{
   text-decoration: underline;
 }
@@ -79,10 +60,8 @@ form button{
   overflow:auto;
 }
 .post{
-  /* width: 20%; */
+  margin: 5px;
   max-width: 50%;
-  /* max-height: 50%; */
-  /* width: fit-content; */
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
@@ -92,7 +71,11 @@ form button{
   border-radius: 20px;
   position: relative;
 }
-.post .content{
+.posts.grid{
+  display:flex;
+  flex-wrap: wrap;
+}
+.post .content p{
   color: black;
   background-color: white;
   margin: 10px;
@@ -104,7 +87,7 @@ form button{
 .post img{
   max-width: 100%;
   max-height: 300px;
-  /* max-height: 0%; */
+  height: min-content;
 }
 h2{
   background-color: #213547;
@@ -115,26 +98,29 @@ label{
 form img{
   max-height: 300px;
 }
-
 .garbaj{
   position: absolute;
   right: 5px;
   bottom: 5px;
 }
-
+.edit{
+  position: absolute;
+  right: 95px;
+  bottom: 5px;
+}
 .garbaj img{
   height: 20px;
 }
-
 .tag:hover{
   text-decoration-line: underline;
 }
-
 .Xbutton{
   display: inline;
   padding: 7px;
 }
-
 button{
   color:white;
+}
+.error{
+  color: red;
 }

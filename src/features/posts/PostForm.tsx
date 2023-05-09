@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState, FocusEvent } from 'react'
 import React from 'react'
 import { AddPostFormArgs, PostFormArgs } from '../../App'
 import { Post } from '../../App'
@@ -13,7 +13,26 @@ const AddPostForm = (args:PostFormArgs) => {
     const [tags, setTags] = useState<string[]>(args.post ? args.post.tags : [])
     const [tag, setTag] = useState<string>('')
     const [id, setId] = useLocalStorage('id', 1)
+    const [titleError,setTitleError] = useState('')
+    const [contentError,setContentError] = useState('')
 
+    const onTitleBlur = (e:FocusEvent<HTMLInputElement>) => {
+        if(e.target.value.length < 1){
+            setTitleError('Every post needs a title')
+        } else {
+            setTitleError('')
+        }
+    }
+    const onTitleFocus = (e:FocusEvent<HTMLInputElement>) => {
+        setTitleError('')
+        setContentError('')
+    }
+    const onContentFocus = (e:FocusEvent<HTMLTextAreaElement>) => {
+        setContentError('')
+    }
+    const onImageFocus = (e:FocusEvent<HTMLInputElement>) => {
+        setContentError('')
+    }
     const onImageChanged = (e:ChangeEvent<HTMLInputElement>) => { 
         if(e.target.files!==null){
             console.log(e.target.files[0])
@@ -62,6 +81,8 @@ const AddPostForm = (args:PostFormArgs) => {
             setContent('')
             setTags([])
             setImage('')
+        } else {
+            setContentError('Each post needs title and content or image')
         }
     }
     const tagComponent = tags.map(postTag=>
@@ -89,15 +110,24 @@ const AddPostForm = (args:PostFormArgs) => {
                 id='postTitle'
                 name='postTitle'
                 value={title}
+                onBlur={onTitleBlur}
+                onFocus={onTitleFocus}
                 onChange={onTitleChanged} />
+            <p className='error'>{titleError}</p>
             <label htmlFor='postContent'>Content:</label>
             <textarea
                     id="postContent"
                     name="postContent"
                     value={content}
+                    onFocus={onContentFocus}
                     onChange={onContentChanged} />
             <label htmlFor='file'>Image:</label>
-            <input accept='.jpg' onChange={onImageChanged} type='file' name='file' id='file'/><br />
+            <input accept='.jpg' 
+                onChange={onImageChanged}
+                onFocus={onImageFocus}
+                type='file' 
+                name='file' 
+                id='file'/><br />
             <label htmlFor='postTag'>Add tag:</label>
             <input 
                 type='text'
@@ -118,6 +148,7 @@ const AddPostForm = (args:PostFormArgs) => {
             {tagComponent}
             <button type='button' onClick={onSavePostClicked} >Save post</button>
         </form>
+        <p className='error'>{contentError}</p>
     </section>
   )
 }

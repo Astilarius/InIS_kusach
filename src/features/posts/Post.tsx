@@ -58,21 +58,26 @@ function Post(args:PostArgs) {
                 <PostForm {...postFormArgs}/> :
                 <div>
                     <h3 className='link' onClick={onTitleClick}>{args.post.title}</h3>
-                    {
-                    args.post.image !== '' ? 
-                    <img src={args.post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> : <br/> 
-                    }
-                    {
-                    args.post.content !== '' ? 
-                    // <div>{postContent}</div> : <br/>
-                    <p className='content'>{args.post.content}</p> : <br/> 
-                    }
+                    <div className='content'>
+                        {
+                        args.post.image !== '' ? 
+                        <img src={args.post.image} alt="Из-за отсустсвия БД картинку было негде сохранить :(" /> : <br/> 
+                        }
+                        {
+                        args.post.content !== '' ? 
+                        // <div>{postContent}</div> : <br/>
+                        <p >{args.post.content}</p> : <br/> 
+                        }
+                    </div>
                     {emojis} 
                     {tags}
                     <p>posted at {new Date(args.post.timestamp).getHours()}:{new Date(args.post.timestamp).getMinutes() < 10 ? `0${new Date(args.post.timestamp).getMinutes()}`: new Date(args.post.timestamp).getMinutes()}</p>
-                    <button className='garbaj' onClick={onDeleteClick}><img src={garbageIcon}/></button>
-                    <button className='edit' onClick={onEditClick}>
+                    <button className='garbaj' onClick={onDeleteClick}>
+                        delete
                         {/* <img src={garbageIcon}/> */}
+                    </button>
+                    <button className='edit' onClick={onEditClick}>
+                        {/* <img src={garbageIcon}/> */}edit
                     </button> 
                 </div>
             }
