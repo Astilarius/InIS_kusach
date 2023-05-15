@@ -1,10 +1,8 @@
-import React from 'react'
-import { useLocalStorage } from '../../hooks/UseLocalStorage';
 import { useParams } from 'react-router-dom';
 import { Post, PostArgs } from '../../App';
-import garbageIcon from '../../assets/i.webp'
-import PostsList from './PostsList';
+import { useLocalStorage } from '../../hooks/UseLocalStorage';
 import PostComponent from './Post';
+import PostsList from './PostsList';
 
 function TagPostsList() {
     const [posts, setPosts] = useLocalStorage('posts', [])

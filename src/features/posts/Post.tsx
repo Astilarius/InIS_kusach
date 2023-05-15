@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import garbageIcon from '../../assets/i.webp'
-import { AddPostFormArgs, Post, PostArgs, PostFormArgs } from '../../App'
-import AddPostForm from './AddPostForm'
+import { Post, PostArgs, PostFormArgs } from '../../App'
 import PostForm from './PostForm'
 
 function Post(args:PostArgs) {

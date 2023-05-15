@@ -1,7 +1,5 @@
-import React, { ChangeEvent, ReactEventHandler, SyntheticEvent, useState } from 'react'
-import { Post, PostArgs } from '../../App'
-import { PostsListArgs } from '../../App'
-import garbageIcon from '../../assets/i.webp'
+import { useState } from 'react'
+import { PostArgs, PostsListArgs } from '../../App'
 import PostComponent from './Post'
 
 const PostsList = (args:PostsListArgs) => {

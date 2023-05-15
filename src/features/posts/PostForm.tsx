@@ -1,9 +1,8 @@
 import { ChangeEvent, useState, FocusEvent } from 'react'
 import React from 'react'
-import { AddPostFormArgs, PostFormArgs } from '../../App'
+import { PostFormArgs } from '../../App'
 import { Post } from '../../App'
 import { initialEmojis } from '../../App'
-import PostsList from './PostsList'
 import { useLocalStorage } from '../../hooks/UseLocalStorage'
 
 const AddPostForm = (args:PostFormArgs) => {

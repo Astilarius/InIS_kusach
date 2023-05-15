@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Post, PostArgs, PostsListArgs } from '../../App'
 import { useLocalStorage } from '../../hooks/UseLocalStorage'
-import garbageIcon from '../../assets/i.webp'
-import PostsList from './PostsList'
 import PostComponent from './Post'
 
 function PostPage() {

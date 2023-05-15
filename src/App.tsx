@@ -1,16 +1,8 @@
-// make this its own app, for people to make reminders for themselves. features:
-// point lists
-// tables
-// also comments, but for yourself
-// tags instead authors
-// edit button
-
 import { ChangeEvent, useEffect, useState } from 'react'
+import './App.css'
 import AddPostForm from './features/posts/AddPostForm'
 import PostsList from './features/posts/PostsList'
 import { useLocalStorage } from './hooks/UseLocalStorage'
-import './App.css'
-import Post from './features/posts/Post'
 
 interface Emojis{
   '👍':number,
