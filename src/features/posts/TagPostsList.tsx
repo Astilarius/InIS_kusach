@@ -9,16 +9,10 @@ function TagPostsList() {
     const params = useParams();
     const tagPosts = posts.filter( (post:Post)=>post.tags.includes((params.tag!)))
     const postsListArgs = {posts:tagPosts,setPosts:setPosts}
-    const renderedPosts = posts.map((post:Post)=>{
-      if(!post.tags.includes(params.tag!)) return null
-      const postArgs:PostArgs = {post:post,setPosts:setPosts}
-      return <PostComponent {...postArgs}/>
-    })
     return (
       <div>
         <button onClick={()=>{location.href = `http://127.0.0.1:5173/`}}>go to all posts</button>
         <h2>Posts with #{params.tag}</h2>
-        {/* {renderedPosts} */}
         <PostsList {...postsListArgs}/>
       </div>
     )

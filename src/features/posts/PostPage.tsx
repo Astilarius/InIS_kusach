@@ -10,17 +10,6 @@ function PostPage() {
     const params = useParams();
     const post:Post = posts.find( (post:Post)=>post.id===Number(params.postId))
 
-    function emojiOnClick(currentPostId:number,emoji:string){
-      console.log(currentPostId)
-      const newPosts = posts.map( (post:Post)=>{
-        if(post.id===currentPostId){
-          post.emojis[emoji]+=1
-        }
-        return post
-      })
-      setPosts(newPosts)
-    }
-
     function handleCommentChange(event: React.ChangeEvent<HTMLInputElement>) {
         setComment(event.target.value)
     }
@@ -38,22 +27,7 @@ function PostPage() {
         setComment('')
     }
 
-    const emojis = Object.entries(post.emojis).map((emoji)=>
-        <button 
-        key={emoji[0]} 
-        onClick={()=>emojiOnClick(post.id, emoji[0])}>
-            {emoji[0]} {emoji[1]}
-        </button>)
-    const onBackClick = ()=>{
-        location.href = 'http://127.0.0.1:5173/'
-    }
-    const onDeleteClick = ()=>{
-      const newPosts = posts.filter((fpost:Post)=>fpost.id!==post.id)
-      setPosts(newPosts)
-      window.location.reload();
-    }
     const postArgs:PostArgs = {post:post,setPosts:setPosts}
-    const postsListArgs:PostsListArgs = {posts:[post],setPosts:setPosts}
     const commentRemove = (commentToRemove:string) => {
         if (post.comments.includes(commentToRemove)){
             const newPosts = posts.map((post: Post) => {

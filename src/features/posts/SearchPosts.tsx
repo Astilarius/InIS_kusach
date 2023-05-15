@@ -12,7 +12,6 @@ function SearchPosts() {
     <div>
       <button onClick={()=>{location.href = `http://127.0.0.1:5173/`}}>go to all posts</button>
       <h2>Posts with {params.title}</h2>
-      {/* {renderedPosts} */}
       <PostsList {...postsListArgs}/>
     </div>
   )

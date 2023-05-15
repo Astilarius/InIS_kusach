@@ -30,9 +30,6 @@ function Post(args:PostArgs) {
     const onEditClick = () => {
         setIsEdited(true)
     }
-    const onEditClose = () => {
-        setIsEdited(false)
-    }
     const emojis = Object.entries(args.post.emojis).map((emoji)=><button key={emoji[0]} onClick={()=>emojiOnClick(args.post.id, emoji[0])}>{emoji[0]} {emoji[1]}</button>)
     const tags = args.post.tags.map(tag=><div onClick={()=>{location.href = `http://127.0.0.1:5173/tag/${tag}`}} className='tag' key={tag}>{tag}#</div>)
     const postFormArgs:PostFormArgs = {onSave:(newPost)=>{
